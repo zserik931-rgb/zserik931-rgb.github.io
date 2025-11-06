@@ -21,25 +21,32 @@
 <body>
   <div class="card">
     <h1>Пожалуйста, подождите...</h1>
-    <p>Мы перенаправим вас на ресурс. Автоматический переход произойдёт через <span id="timer">7</span> секунд.</p>
-    <a id="manual" class="btn" href="https://otieu.com/4/10148094" target="_blank" rel="noopener">Перейти сейчас</a>
+    <p>Мы перенаправим вас на ресурс. Автоматический переход произойдёт через <span id="timer">15</span> секунд.</p>
+    <a id="manual" class="btn" href="https://otieu.com/4/10148094" target="_blank" rel="noopener noreferrer">Перейти сейчас</a>
     <div class="small">Если перенаправление не произошло — нажмите «Перейти сейчас».</div>
   </div>
   <script>
+    // Ссылка, на которую идёт редирект
     const MONETAG_LINK = "https://otieu.com/4/10148094";
-    const MIN_DELAY = 5;
-    const MAX_DELAY = 9;
+    // Случайная задержка в секундах (подними/опусти по желанию)
+    const MIN_DELAY = 15;
+    const MAX_DELAY = 20;
     function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
     let t = randInt(MIN_DELAY, MAX_DELAY);
-    document.getElementById('timer').textContent = t;
-    document.getElementById('manual').href = MONETAG_LINK;
+    const timerEl = document.getElementById('timer');
+    const manualEl = document.getElementById('manual');
+    timerEl.textContent = t;
+    manualEl.href = MONETAG_LINK;
+
+    // Запуск обратного отсчёта
     const tick = setInterval(() => {
       t--;
       if (t <= 0) {
         clearInterval(tick);
+        // Переадресация в том же окне (чтобы считался нормальный переход)
         location.href = MONETAG_LINK;
       } else {
-        document.getElementById('timer').textContent = t;
+        timerEl.textContent = t;
       }
     }, 1000);
   </script>
