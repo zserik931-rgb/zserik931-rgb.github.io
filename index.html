@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Подождите...</title>
+  <style>
+    body {
+      margin:0; padding:28px; font-family:Arial,Helvetica,sans-serif;
+      background:#111; color:#eee; display:flex; align-items:center; justify-content:center; height:100vh;
+    }
+    .card { max-width:640px; text-align:center; padding:20px; border-radius:10px; background:rgba(255,255,255,0.05);}
+    h1 { margin:0 0 10px; font-size:24px; }
+    p { margin:0 0 20px; font-size:16px; }
+    .btn { display:inline-block; padding:10px 16px; border-radius:6px; text-decoration:none; color:#fff;
+           background:#28a745; transition:background .3s; }
+    .btn:hover { background:#218838; }
+    .small { margin-top:12px; font-size:13px; color:#aaa; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Пожалуйста, подождите...</h1>
+    <p>Мы перенаправим вас на ресурс. Автоматический переход произойдёт через <span id="timer">7</span> секунд.</p>
+    <a id="manual" class="btn" href="https://otieu.com/4/10148094" target="_blank" rel="noopener">Перейти сейчас</a>
+    <div class="small">Если перенаправление не произошло — нажмите «Перейти сейчас».</div>
+  </div>
+  <script>
+    const MONETAG_LINK = "https://otieu.com/4/10148094";
+    const MIN_DELAY = 5;
+    const MAX_DELAY = 9;
+    function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+    let t = randInt(MIN_DELAY, MAX_DELAY);
+    document.getElementById('timer').textContent = t;
+    document.getElementById('manual').href = MONETAG_LINK;
+    const tick = setInterval(() => {
+      t--;
+      if (t <= 0) {
+        clearInterval(tick);
+        location.href = MONETAG_LINK;
+      } else {
+        document.getElementById('timer').textContent = t;
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
